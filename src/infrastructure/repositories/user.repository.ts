@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../../domain/model/user';
 import { UserRepository } from '../../domain/repositories/userRepository.interface';
-
+import { User } from '../entities/user.entity';
+import { UserM } from '../../domain/model/user';
 @Injectable()
 export class DatabaseUserRepository implements UserRepository {
   constructor(
@@ -11,22 +11,25 @@ export class DatabaseUserRepository implements UserRepository {
     private readonly userEntityRepository: Repository<User>,
   ) {}
 
-  async create(user: User): Promise<User> {
-    const userEntity = this.userEntityRepository.create(user);
+  async create(user: UserM): Promise<UserM> {
+    const userEntity = this.toUserEntity(user);
     const createdUser = await this.userEntityRepository.save(userEntity);
     return this.toUser(createdUser);
   }
-  async getAll(): Promise<User[]> {
+
+  async getAll(): Promise<UserM[]> {
     const users = await this.userEntityRepository.find();
     return users.map(this.toUser);
   }
-  async getById(id: any): Promise<User> {
+  async getById(id: any): Promise<UserM> {
     const userEntity = await this.userEntityRepository.findOne(id);
     if (!userEntity) throw new Error('User not found');
     return this.toUser(userEntity);
   }
-  async update(id: any, user: Partial<User>): Promise<User> {
-    await this.userEntityRepository.update(id, user);
+ 
+  async update(id: any, user: Partial<UserM>): Promise<UserM> {
+    const userEntity = this.toUserEntity(user as UserM);
+    await this.userEntityRepository.update(id, userEntity);
     const updatedUser = await this.userEntityRepository.findOne(id);
     if (!updatedUser) throw new Error('User not found');
     return this.toUser(updatedUser);
@@ -35,7 +38,7 @@ export class DatabaseUserRepository implements UserRepository {
     await this.userEntityRepository.delete(id);
   }
 
-  async findByEmail(email: any): Promise<User> {
+  async findByEmail(email: any): Promise<UserM> {
     console.log(`Searching for user with email: ${email}`);
     const userEntity = await this.userEntityRepository.findOne({
       where: {
@@ -45,37 +48,37 @@ export class DatabaseUserRepository implements UserRepository {
     console.log(`Query result: ${JSON.stringify(userEntity)}`);
     return userEntity ? this.toUser(userEntity) : null;
   }
-  async findOne(criteria: any): Promise<User> {
+  async findOne(criteria: any): Promise<UserM> {
     const userEntity = await this.userEntityRepository.findOne(criteria);
     return userEntity ? this.toUser(userEntity) : null;
   }
-  async save(user: User): Promise<void> {
-    const userEntity = this.userEntityRepository.create(user);
+  async save(user: UserM): Promise<void> {
+    const userEntity = this.toUserEntity(user);
     await this.userEntityRepository.save(userEntity);
   }
-  private toUser(userEntity: User): User {
-    const user = new User();
 
-    user.id = userEntity.id.toString();
-    user.name = userEntity.name;
-    user.password = userEntity.password;
-    user.address = userEntity.address;
-    user.birthDate = userEntity.birthDate;
-    // user.lastLogin = userEntity.last_login;
-    // user.hashRefreshToken = userEntity.hach_refresh_token;
+  private toUser(adminUserEntity: User): UserM {
+    const adminUser: UserM = new UserM();
 
-    return user;
+    adminUser.name = adminUserEntity.name;
+    adminUser.password = adminUserEntity.password;
+    adminUser.address = adminUserEntity.address;
+    adminUser.birthDate = adminUserEntity.birthDate;
+    adminUser.address = adminUserEntity.address;
+    adminUser.codePostal= adminUserEntity.codePostal;
+    adminUser.city = adminUserEntity.city;
+
+    return adminUser;
   }
-  private toUserEntity(adminUser: User): User {
+  private toUserEntity(adminUser: UserM): User {
     const adminUserEntity: User = new User();
 
     adminUserEntity.name = adminUser.name;
     adminUserEntity.email = adminUser.email;
     adminUserEntity.password = adminUser.password;
-    adminUserEntity.Role = adminUser.Role;
+    adminUserEntity.role = adminUser.Role;
     adminUserEntity.birthDate = adminUser.birthDate;
     adminUserEntity.city = adminUser.city;
-    adminUserEntity.countryCode = adminUser.countryCode;
     adminUserEntity.phoneNumber = adminUser.phoneNumber;
     adminUserEntity.address = adminUser.address;
     adminUserEntity.codePostal = adminUser.codePostal;

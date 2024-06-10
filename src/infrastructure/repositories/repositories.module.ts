@@ -5,8 +5,8 @@ import { User } from '../entities/user.entity';
 import { DatabaseUserRepository } from './user.repository';
 
 @Module({
-  imports: [TypeOrmConfigModule, TypeOrmModule.forFeature([Todo, User])],
-  providers: [DatabaseTodoRepository, DatabaseUserRepository],
-  exports: [DatabaseTodoRepository, DatabaseUserRepository],
+  imports: [TypeOrmModule.forFeature([User])],
+  providers: [DatabaseUserRepository],
+  exports: [DatabaseUserRepository],
 })
 export class RepositoriesModule {}

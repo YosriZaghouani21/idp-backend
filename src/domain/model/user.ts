@@ -1,9 +1,5 @@
-export class Image {
-  public_id: string;
-  url: string;
-}
-
-export class User {
+import { ObjectId } from 'mongodb'; 
+export class UserM {
   id: string;
   name: string;
   email: string;
@@ -11,16 +7,16 @@ export class User {
   countryCode: string;
   password: string;
   address: string;
-  birthDate: string;
+  birthDate: Date;
   codePostal: string;
   country: string;
   city: string;
   Role: string;
   createdAt: Date;
-  image: Image;
+  image: string;
   Fonction: string;
-  myProject: string[];
-  myRepo: string[];
+  myProject: ObjectId[]; 
+  myRepo: ObjectId[];
   resetLink: string;
   status: string;
   description: string;
