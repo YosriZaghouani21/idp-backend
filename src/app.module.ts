@@ -23,8 +23,7 @@ import { JwtModule } from '@nestjs/jwt';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: () => {
-        const dbUrl =
-          'mongodb+srv://yosri:XympO44V7qQoumfS@idp.i24g5rc.mongodb.net/';
+        const dbUrl = process.env.DATABASE_URL;
         console.log(`Connecting to database: ${dbUrl}`);
         return {
           type: 'mongodb',
