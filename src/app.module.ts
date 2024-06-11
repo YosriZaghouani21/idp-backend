@@ -7,30 +7,40 @@ import { EnvironmentConfigModule } from './infrastructure/config/environment-con
 import { LoggerModule } from './infrastructure/logger/logger.module';
 import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module';
 import { RepositoriesModule } from './infrastructure/repositories/repositories.module';
-import { User } from './infrastructure/entities/user.entity';
+import { users } from './infrastructure/entities/user.entity';
+import { ControllersModule } from './infrastructure/controllers/controller.module';
+import { UsecasesProxyModule } from './infrastructure/usercases-proxy/usecases-proxy.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot(),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        const dbUrl = 'mongodb+srv://yosri:XympO44V7qQoumfS@idp.i24g5rc.mongodb.net/';
+      useFactory: () => {
+        const dbUrl =
+          'mongodb+srv://yosri:XympO44V7qQoumfS@idp.i24g5rc.mongodb.net/';
         console.log(`Connecting to database: ${dbUrl}`);
         return {
           type: 'mongodb',
           url: dbUrl,
-          entities: [User],
-          synchronize: true,
+          entities: [users],
+          synchronize: false,
         };
       },
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([users]),
     EnvironmentConfigModule,
     LoggerModule,
     ExceptionsModule,
     RepositoriesModule,
+    ControllersModule,
+    UsecasesProxyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

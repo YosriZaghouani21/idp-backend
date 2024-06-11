@@ -9,4 +9,6 @@ export interface UserRepository {
   findByEmail(email: string): Promise<UserM | null>;
   findOne(criteria: any): Promise<UserM | null>;
   save(UserM: UserM): Promise<void>;
+  updateRefreshToken(name: string, refreshToken: string): Promise<void>;
+  getUserByUsername(name: string): Promise<UserM>;
 }

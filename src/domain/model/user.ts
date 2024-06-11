@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb'; 
+import { ObjectId } from 'mongodb';
 export class UserM {
   id: string;
   name: string;
@@ -15,9 +15,10 @@ export class UserM {
   createdAt: Date;
   image: string;
   Fonction: string;
-  myProject: ObjectId[]; 
+  myProject: ObjectId[];
   myRepo: ObjectId[];
   resetLink: string;
   status: string;
   description: string;
+  hashRefreshToken: string;
 }

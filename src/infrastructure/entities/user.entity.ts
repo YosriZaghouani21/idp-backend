@@ -1,7 +1,7 @@
 import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
 
 @Entity()
-export class User {
+export class users {
   @ObjectIdColumn()
   id: ObjectId;
 
@@ -55,4 +55,7 @@ export class User {
 
   @Column({ nullable: true })
   description?: string;
+
+  @Column('varchar', { nullable: true })
+  hach_refresh_token: string;
 }
