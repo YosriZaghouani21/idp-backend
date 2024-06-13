@@ -11,12 +11,13 @@ import { DatabaseUserRepository } from '../repositories/user.repository';
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { EnvironmentConfigService } from '../config/environment-config/environment-config.service';
 import { UseCaseProxy } from './usecases-proxy';
-import { JwtTokenService } from '../controllers/services/jwt/jwt.service';
-import { BcryptService } from '../controllers/services/bcrypt/bcrypt.service';
-import { BcryptModule } from '../controllers/services/bcrypt/bcrypt.module';
-import { JwtModule } from '../controllers/services/jwt/jwt.module';
+
 import { LoginUseCases } from 'src/use-cases/auth/login.usecases';
 import { ControllersModule } from '../controllers/controller.module';
+import { BcryptService } from '../services/bcrypt/bcrypt.service';
+import { JwtTokenService } from '../services/jwt/jwt.service';
+import { BcryptModule } from '../services/bcrypt/bcrypt.module';
+import { JwtModule } from '../services/jwt/jwt.module';
 
 @Module({
   imports: [
