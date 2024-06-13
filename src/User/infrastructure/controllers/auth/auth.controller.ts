@@ -8,11 +8,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { AuthLoginDto } from './auth-dto.class';
 import { IsAuthPresenter } from './auth.presenter';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
 import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
+import { AuthLoginDto } from '../../DTO/auth-dto.class';
 
 @Controller('auth')
 @ApiTags('auth')
