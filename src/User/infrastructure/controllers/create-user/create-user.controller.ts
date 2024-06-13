@@ -58,9 +58,7 @@ export class CreateUserController {
         image: '',
         Fonction: '',
         myProject: [],
-
         myRepo: [],
-
         resetLink: '',
         status: '',
         description: '',
