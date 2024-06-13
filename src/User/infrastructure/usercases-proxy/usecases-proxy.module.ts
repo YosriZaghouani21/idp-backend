@@ -17,7 +17,7 @@ import { BcryptService } from '../services/bcrypt/bcrypt.service';
 import { JwtTokenService } from '../services/jwt/jwt.service';
 import { BcryptModule } from '../services/bcrypt/bcrypt.module';
 import { JwtModule } from '../services/jwt/jwt.module';
-import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
+import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 
 @Module({
   imports: [

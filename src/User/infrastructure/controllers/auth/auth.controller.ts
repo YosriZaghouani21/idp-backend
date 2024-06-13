@@ -12,7 +12,7 @@ import { AuthLoginDto } from './auth-dto.class';
 import { IsAuthPresenter } from './auth.presenter';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
-import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
+import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 
 @Controller('auth')
 @ApiTags('auth')

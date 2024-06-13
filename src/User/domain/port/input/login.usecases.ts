@@ -4,7 +4,7 @@ import {
 } from 'src/User/domain/adapters/jwt.interface';
 import { JWTConfig } from 'src/User/domain/config/jwt.interface';
 import { ILogger } from 'src/User/domain/logger/logger.interface';
-import { UserRepository } from '../../../output/repositories/userRepository.interface';
+import { UserRepository } from '../output/userRepository.interface';
 import { IBcryptService } from 'src/User/domain/adapters/bcrypt.interface';
 import { UserM } from 'src/User/domain/model/user';
 

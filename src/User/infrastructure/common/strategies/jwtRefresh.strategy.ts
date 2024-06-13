@@ -8,7 +8,7 @@ import { ExceptionsService } from '../../exceptions/exceptions.service';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
-import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
+import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 
 @Injectable()
 export class JwtRefreshTokenStrategy extends PassportStrategy(

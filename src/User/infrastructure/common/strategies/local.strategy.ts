@@ -5,7 +5,7 @@ import { LoggerService } from '../../logger/logger.service';
 import { ExceptionsService } from '../../exceptions/exceptions.service';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
-import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
+import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
