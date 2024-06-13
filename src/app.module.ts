@@ -3,14 +3,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
-import { LoggerModule } from './infrastructure/logger/logger.module';
-import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module';
-import { RepositoriesModule } from './infrastructure/repositories/repositories.module';
-import { users } from './infrastructure/entities/user.entity';
-import { ControllersModule } from './infrastructure/controllers/controller.module';
-import { UsecasesProxyModule } from './infrastructure/usercases-proxy/usecases-proxy.module';
+
 import { JwtModule } from '@nestjs/jwt';
+import { EnvironmentConfigModule } from './User/infrastructure/config/environment-config/environment-config.module';
+import { LoggerModule } from './User/infrastructure/logger/logger.module';
+import { ExceptionsModule } from './User/infrastructure/exceptions/exceptions.module';
+import { RepositoriesModule } from './User/infrastructure/repositories/repositories.module';
+import { ControllersModule } from './User/infrastructure/controllers/controller.module';
+import { UsecasesProxyModule } from './User/infrastructure/usercases-proxy/usecases-proxy.module';
+import { users } from './User/infrastructure/entities/user.entity';
 
 @Module({
   imports: [

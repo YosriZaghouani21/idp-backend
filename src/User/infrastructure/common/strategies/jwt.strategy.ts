@@ -4,9 +4,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { ExceptionsService } from '../../exceptions/exceptions.service';
 import { LoggerService } from '../../logger/logger.service';
-import { UsecasesProxyModule } from 'src/infrastructure/usercases-proxy/usecases-proxy.module';
-import { UseCaseProxy } from 'src/infrastructure/usercases-proxy/usecases-proxy';
-import { LoginUseCases } from 'src/use-cases/auth/login.usecases';
+import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
+import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
+import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

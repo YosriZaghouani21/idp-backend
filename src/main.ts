@@ -1,14 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { AllExceptionFilter } from './infrastructure/common/filter/exception.filter';
-import { LoggerService } from './infrastructure/logger/logger.service';
 import * as cookieParser from 'cookie-parser';
-import { LoggingInterceptor } from './infrastructure/common/interceptors/logger.interceptor';
+
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AllExceptionFilter } from './User/infrastructure/common/filter/exception.filter';
+import { LoggerService } from './User/infrastructure/logger/logger.service';
+import { LoggingInterceptor } from './User/infrastructure/common/interceptors/logger.interceptor';
 import {
   ResponseFormat,
   ResponseInterceptor,
-} from './infrastructure/common/interceptors/response.interceptor';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+} from './User/infrastructure/common/interceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -6,9 +6,9 @@ import { TokenPayload } from '../../../domain/model/auth';
 import { LoggerService } from '../../logger/logger.service';
 import { ExceptionsService } from '../../exceptions/exceptions.service';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { UsecasesProxyModule } from 'src/infrastructure/usercases-proxy/usecases-proxy.module';
-import { UseCaseProxy } from 'src/infrastructure/usercases-proxy/usecases-proxy';
-import { LoginUseCases } from 'src/use-cases/auth/login.usecases';
+import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
+import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
+import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
 
 @Injectable()
 export class JwtRefreshTokenStrategy extends PassportStrategy(

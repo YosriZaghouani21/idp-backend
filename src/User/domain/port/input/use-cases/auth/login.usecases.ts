@@ -1,12 +1,13 @@
-import { UserM } from 'src/domain/model/user';
-import { IBcryptService } from '../../domain/adapters/bcrypt.interface';
 import {
   IJwtService,
   IJwtServicePayload,
-} from '../../domain/adapters/jwt.interface';
-import { JWTConfig } from '../../domain/config/jwt.interface';
-import { ILogger } from '../../domain/logger/logger.interface';
-import { UserRepository } from '../../domain/repositories/userRepository.interface';
+} from 'src/User/domain/adapters/jwt.interface';
+import { JWTConfig } from 'src/User/domain/config/jwt.interface';
+import { ILogger } from 'src/User/domain/logger/logger.interface';
+import { UserRepository } from '../../../output/repositories/userRepository.interface';
+import { IBcryptService } from 'src/User/domain/adapters/bcrypt.interface';
+import { UserM } from 'src/User/domain/model/user';
+
 export class LoginUseCases {
   constructor(
     private readonly logger: ILogger,

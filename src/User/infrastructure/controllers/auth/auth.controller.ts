@@ -10,10 +10,9 @@ import {
 
 import { AuthLoginDto } from './auth-dto.class';
 import { IsAuthPresenter } from './auth.presenter';
-// import JwtRefreshGuard from '../../common/guards/jwtRefresh.guard';
-import { UseCaseProxy } from 'src/infrastructure/usercases-proxy/usecases-proxy';
-import { UsecasesProxyModule } from 'src/infrastructure/usercases-proxy/usecases-proxy.module';
-import { LoginUseCases } from '../../../use-cases/auth/login.usecases';
+import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
+import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
+import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
 
 @Controller('auth')
 @ApiTags('auth')

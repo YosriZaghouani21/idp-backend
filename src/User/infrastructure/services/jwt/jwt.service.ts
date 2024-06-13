@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import {
   IJwtService,
   IJwtServicePayload,
-} from 'src/domain/adapters/jwt.interface';
+} from 'src/User/domain/adapters/jwt.interface';
 
 @Injectable()
 export class JwtTokenService implements IJwtService {

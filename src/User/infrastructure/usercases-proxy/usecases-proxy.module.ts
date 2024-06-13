@@ -12,12 +12,12 @@ import { EnvironmentConfigModule } from '../config/environment-config/environmen
 import { EnvironmentConfigService } from '../config/environment-config/environment-config.service';
 import { UseCaseProxy } from './usecases-proxy';
 
-import { LoginUseCases } from 'src/use-cases/auth/login.usecases';
 import { ControllersModule } from '../controllers/controller.module';
 import { BcryptService } from '../services/bcrypt/bcrypt.service';
 import { JwtTokenService } from '../services/jwt/jwt.service';
 import { BcryptModule } from '../services/bcrypt/bcrypt.module';
 import { JwtModule } from '../services/jwt/jwt.module';
+import { LoginUseCases } from 'src/User/domain/port/input/use-cases/auth/login.usecases';
 
 @Module({
   imports: [
