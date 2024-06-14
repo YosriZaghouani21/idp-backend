@@ -6,10 +6,22 @@ import { CreateUserUseCase } from 'src/User/domain/port/input/create.usecases';
 import { CreateUserController } from './create-user/create-user.controller';
 import { UpdateUserUseCase } from 'src/User/domain/port/input/update.usecases';
 import { UpdateUserController } from './update-user/update-user.controller';
+import { DeleteUserController } from './delete-user/delete-user.controller';
+import { DeleteUserUseCase } from 'src/User/domain/port/input/delete.usecases';
 
 @Module({
   imports: [UsecasesProxyModule.register()],
-  controllers: [AuthController, CreateUserController, UpdateUserController],
-  providers: [LoginUseCases, CreateUserUseCase, UpdateUserUseCase],
+  controllers: [
+    AuthController,
+    CreateUserController,
+    UpdateUserController,
+    DeleteUserController,
+  ],
+  providers: [
+    LoginUseCases,
+    CreateUserUseCase,
+    UpdateUserUseCase,
+    DeleteUserUseCase,
+  ],
 })
 export class ControllersModule {}

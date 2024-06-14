@@ -6,7 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { IsAuthPresenter } from './create-user.presenter';
+import { IsCreatedPresenter } from './create-user.presenter';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
 import { CreateUserUseCase } from 'src/User/domain/port/input/create.usecases';
@@ -28,7 +28,7 @@ import { UserM } from 'src/User/domain/model/user';
   description: 'No authorization token was found',
 })
 @ApiResponse({ status: 500, description: 'Internal error' })
-@ApiExtraModels(IsAuthPresenter)
+@ApiExtraModels(IsCreatedPresenter)
 export class CreateUserController {
   constructor(
     @Inject(UsecasesProxyModule.CREATE_USER_USECASES_PROXY)

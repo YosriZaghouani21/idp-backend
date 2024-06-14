@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserM } from 'src/User/domain/model/user';
 
-export class IsCreatedPresenter {
+export class IsDeletedPresenter {
   @ApiProperty({
     example: 201,
     description: 'HTTP status code of the response',
@@ -9,11 +9,11 @@ export class IsCreatedPresenter {
   statusCode: number;
 
   @ApiProperty({
-    example: 'User created successfully',
+    example: 'User deleted successfully',
     description: 'Message about the operation result',
   })
   message: string;
 
-  @ApiProperty({ type: () => UserM, description: 'Created user details' })
+  @ApiProperty({ type: () => UserM, description: 'deleted user details' })
   data: UserM;
 }

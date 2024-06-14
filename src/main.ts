@@ -31,7 +31,7 @@ async function bootstrap() {
     const config = new DocumentBuilder()
       .addBearerAuth()
       .setTitle('Clean Architecture Nestjs')
-      .setDescription('Example with todo list')
+      .setDescription('IDP Project')
       .setVersion('1.0')
       .build();
     const document = SwaggerModule.createDocument(app, config, {

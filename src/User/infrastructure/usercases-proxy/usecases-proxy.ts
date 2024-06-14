@@ -3,4 +3,8 @@ export class UseCaseProxy<T> {
   getInstance(): T {
     return this.useCase;
   }
+  async executeMethod(methodName: string, args: any[]): Promise<any> {
+    const useCaseInstance = this.getInstance();
+    return useCaseInstance[methodName](...args);
+  }
 }

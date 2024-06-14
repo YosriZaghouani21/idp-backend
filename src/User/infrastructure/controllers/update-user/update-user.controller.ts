@@ -6,7 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { IsAuthPresenter } from './update-user.presenter';
+import { IsUpdatedPresenter } from './update-user.presenter';
 import { UsecasesProxyModule } from '../../usercases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usercases-proxy/usecases-proxy';
 import { UpdateUserUseCase } from 'src/User/domain/port/input/update.usecases';
@@ -17,6 +17,7 @@ import {
   HttpException,
   HttpStatus,
   Inject,
+  Param,
   Put,
 } from '@nestjs/common';
 import { UserM } from 'src/User/domain/model/user';
@@ -28,19 +29,31 @@ import { UserM } from 'src/User/domain/model/user';
   description: 'No authorization token was found',
 })
 @ApiResponse({ status: 500, description: 'Internal error' })
-@ApiExtraModels(IsAuthPresenter)
+@ApiExtraModels(IsUpdatedPresenter)
 export class UpdateUserController {
   constructor(
     @Inject(UsecasesProxyModule.UPDATE_USER_USECASES_PROXY)
     private readonly UpdateUsecaseProxy: UseCaseProxy<UpdateUserUseCase>,
   ) {}
 
-  @Put('update')
+  // Inside UpdateUserController
+  @Put('update/:id')
   @ApiBearerAuth()
-  @ApiOperation({ description: 'update user' })
-  async updateUser(@Body() updateUserDto: UpdateUserDto) {
+  @ApiOperation({ description: 'Update user' })
+  async updateUser(
+    @Param('id') userId: any,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     try {
-      const userM: UserM = {
+      const userExists = await this.UpdateUsecaseProxy.getInstance().updateUser(
+        updateUserDto,
+        userId,
+      );
+      if (!userExists) {
+        throw new HttpException('User does not exist.', HttpStatus.NOT_FOUND);
+      }
+
+      const updatedFields: Partial<UserM> = {
         name: updateUserDto.name,
         phoneNumber: updateUserDto.phoneNumber || '',
         countryCode: updateUserDto.countryCode || '',
@@ -52,9 +65,11 @@ export class UpdateUserController {
         description: updateUserDto.description || '',
       };
 
-      const updateUserUseCase = this.UpdateUsecaseProxy.getInstance();
-      const updatedUser = await updateUserUseCase.updateUser(userM);
-
+      const updatedUser =
+        await this.UpdateUsecaseProxy.getInstance().updateUser(
+          updatedFields,
+          userId,
+        );
       return {
         statusCode: HttpStatus.OK,
         message: 'User updated successfully',

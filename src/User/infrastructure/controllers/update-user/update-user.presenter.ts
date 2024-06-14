@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserM } from 'src/User/domain/model/user';
 
-export class IsAuthPresenter {
+export class IsUpdatedPresenter {
   @ApiProperty({
     example: 201,
     description: 'HTTP status code of the response',

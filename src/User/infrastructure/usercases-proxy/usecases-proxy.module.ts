@@ -20,6 +20,7 @@ import { JwtModule } from '../services/jwt/jwt.module';
 import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 import { CreateUserUseCase } from 'src/User/domain/port/input/create.usecases';
 import { UpdateUserUseCase } from 'src/User/domain/port/input/update.usecases';
+import { DeleteUserUseCase } from 'src/User/domain/port/input/delete.usecases';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ export class UsecasesProxyModule {
   static LOGIN_USECASES_PROXY = 'LoginUseCasesProxy';
   static CREATE_USER_USECASES_PROXY = 'CreateUserUseCasesProxy';
   static UPDATE_USER_USECASES_PROXY = 'UpdateUserUseCasesProxy';
+  static DELETE_USER_USECASES_PROXY = 'DeleteUserUseCasesProxy';
 
   static register(): DynamicModule {
     return {
@@ -72,7 +74,6 @@ export class UsecasesProxyModule {
           provide: UsecasesProxyModule.CREATE_USER_USECASES_PROXY,
           useFactory: (
             userRepo: DatabaseUserRepository,
-
             bcryptService: BcryptService,
           ) => new UseCaseProxy(new CreateUserUseCase(userRepo, bcryptService)),
         },
@@ -82,12 +83,19 @@ export class UsecasesProxyModule {
           useFactory: (userRepo: DatabaseUserRepository) =>
             new UseCaseProxy(new UpdateUserUseCase(userRepo)),
         },
+        {
+          inject: [DatabaseUserRepository],
+          provide: UsecasesProxyModule.DELETE_USER_USECASES_PROXY,
+          useFactory: (userRepo: DatabaseUserRepository) =>
+            new UseCaseProxy(new DeleteUserUseCase(userRepo)),
+        },
         ControllersModule,
       ],
       exports: [
         UsecasesProxyModule.LOGIN_USECASES_PROXY,
         UsecasesProxyModule.CREATE_USER_USECASES_PROXY,
         UsecasesProxyModule.UPDATE_USER_USECASES_PROXY,
+        UsecasesProxyModule.DELETE_USER_USECASES_PROXY,
       ],
     };
   }
