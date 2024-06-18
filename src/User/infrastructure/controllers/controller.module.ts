@@ -8,6 +8,8 @@ import { UpdateUserUseCase } from 'src/User/domain/port/input/update.usecases';
 import { UpdateUserController } from './update-user/update-user.controller';
 import { DeleteUserController } from './delete-user/delete-user.controller';
 import { DeleteUserUseCase } from 'src/User/domain/port/input/delete.usecases';
+import { UploadUserController } from './upload-image/uploadimage-user.controller';
+import { UploadimageUserUseCase } from 'src/User/domain/port/input/uploadimage.usecases';
 
 @Module({
   imports: [UsecasesProxyModule.register()],
@@ -16,12 +18,14 @@ import { DeleteUserUseCase } from 'src/User/domain/port/input/delete.usecases';
     CreateUserController,
     UpdateUserController,
     DeleteUserController,
+    UploadUserController,
   ],
   providers: [
     LoginUseCases,
     CreateUserUseCase,
     UpdateUserUseCase,
     DeleteUserUseCase,
+    UploadimageUserUseCase,
   ],
 })
 export class ControllersModule {}

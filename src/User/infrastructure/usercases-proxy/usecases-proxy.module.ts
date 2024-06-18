@@ -21,6 +21,7 @@ import { LoginUseCases } from 'src/User/domain/port/input/login.usecases';
 import { CreateUserUseCase } from 'src/User/domain/port/input/create.usecases';
 import { UpdateUserUseCase } from 'src/User/domain/port/input/update.usecases';
 import { DeleteUserUseCase } from 'src/User/domain/port/input/delete.usecases';
+import { UploadimageUserUseCase } from 'src/User/domain/port/input/uploadimage.usecases';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ export class UsecasesProxyModule {
   static CREATE_USER_USECASES_PROXY = 'CreateUserUseCasesProxy';
   static UPDATE_USER_USECASES_PROXY = 'UpdateUserUseCasesProxy';
   static DELETE_USER_USECASES_PROXY = 'DeleteUserUseCasesProxy';
+  static UPLOAD_USER_IMAGE_USECASE_PROXY = 'UploadUserImageUseCasesProxy';
 
   static register(): DynamicModule {
     return {
@@ -89,6 +91,12 @@ export class UsecasesProxyModule {
           useFactory: (userRepo: DatabaseUserRepository) =>
             new UseCaseProxy(new DeleteUserUseCase(userRepo)),
         },
+        {
+          inject: [DatabaseUserRepository],
+          provide: UsecasesProxyModule.UPLOAD_USER_IMAGE_USECASE_PROXY,
+          useFactory: (userRepo: DatabaseUserRepository) =>
+            new UseCaseProxy(new UploadimageUserUseCase(userRepo)),
+        },
         ControllersModule,
       ],
       exports: [
@@ -96,6 +104,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.CREATE_USER_USECASES_PROXY,
         UsecasesProxyModule.UPDATE_USER_USECASES_PROXY,
         UsecasesProxyModule.DELETE_USER_USECASES_PROXY,
+        UsecasesProxyModule.UPLOAD_USER_IMAGE_USECASE_PROXY,
       ],
     };
   }

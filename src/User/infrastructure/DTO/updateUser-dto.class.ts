@@ -12,6 +12,11 @@ export class UpdateUserDto {
   @IsString()
   readonly address?: string;
 
+  @ApiProperty({ required: false, description: 'The email of the user' })
+  @IsOptional()
+  @IsString()
+  readonly email?: string;
+
   @ApiProperty({ required: false, description: 'The birthDate of the user' })
   @IsOptional()
   @IsDate()
@@ -46,4 +51,9 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   readonly description?: string;
+
+  @ApiProperty({ required: false, description: 'The image of the user' })
+  @IsOptional()
+  @IsString()
+  readonly image?: string;
 }

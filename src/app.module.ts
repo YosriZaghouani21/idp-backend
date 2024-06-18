@@ -12,6 +12,7 @@ import { RepositoriesModule } from './User/infrastructure/repositories/repositor
 import { ControllersModule } from './User/infrastructure/controllers/controller.module';
 import { UsecasesProxyModule } from './User/infrastructure/usercases-proxy/usecases-proxy.module';
 import { users } from './User/infrastructure/entities/user.entity';
+import { CloudinaryConfigModule } from './User/domain/config/cloudinary-config.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { users } from './User/infrastructure/entities/user.entity';
     RepositoriesModule,
     ControllersModule,
     UsecasesProxyModule,
+    CloudinaryConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],

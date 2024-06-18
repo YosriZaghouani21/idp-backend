@@ -18,7 +18,7 @@ import {
   HttpStatus,
   Inject,
   Param,
-  Put,
+  Patch,
 } from '@nestjs/common';
 import { UserM } from 'src/User/domain/model/user';
 
@@ -37,7 +37,7 @@ export class UpdateUserController {
   ) {}
 
   // Inside UpdateUserController
-  @Put('update/:id')
+  @Patch('update/:id')
   @ApiBearerAuth()
   @ApiOperation({ description: 'Update user' })
   async updateUser(
@@ -55,14 +55,15 @@ export class UpdateUserController {
 
       const updatedFields: Partial<UserM> = {
         name: updateUserDto.name,
-        phoneNumber: updateUserDto.phoneNumber || '',
-        countryCode: updateUserDto.countryCode || '',
+        // email: updateUserDto.email || '',
+        phoneNumber: updateUserDto.phoneNumber,
+        countryCode: updateUserDto.countryCode,
         address: updateUserDto.address,
         birthDate: updateUserDto.birthDate,
         codePostal: updateUserDto.codePostal,
         country: updateUserDto.country,
         city: updateUserDto.city,
-        description: updateUserDto.description || '',
+        description: updateUserDto.description,
       };
 
       const updatedUser =

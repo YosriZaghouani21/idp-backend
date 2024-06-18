@@ -14,6 +14,6 @@ export class IsUpdatedPresenter {
   })
   message: string;
 
-  @ApiProperty({ type: () => UserM, description: 'updated user details' })
+  @ApiProperty({ type: () => UserM, description: 'Updated user details' })
   data: UserM;
 }
